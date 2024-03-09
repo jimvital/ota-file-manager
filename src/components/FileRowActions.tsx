@@ -1,8 +1,8 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 
-import { CurrentFile, RenameFile } from "./types";
+import { CurrentFile, RenameFile } from "../types";
 
-import { useTimeout } from "./hooks/useTimeout";
+import { useTimeout } from "../hooks/useTimeout";
 
 interface FileRowCreateCopyProps {
   file: CurrentFile;
@@ -26,7 +26,7 @@ const FileRowCreateCopy: React.FC<FileRowCreateCopyProps> = ({
   const [didClick, setDidClick] = useState<boolean>(false);
 
   const { isRunning, resumeTimeout, pauseTimeout } = useTimeout(() => {
-    const filenameCopy = `${file.filename}-copy`;
+    const filenameCopy = `(copy) ${file.filename}`;
 
     const fileCopy = {
       id: currentFiles.length + 1,
@@ -47,18 +47,20 @@ const FileRowCreateCopy: React.FC<FileRowCreateCopyProps> = ({
   }, [isRunning, setShouldDisable]);
 
   return (
-    <div style={{ display: "flex" }}>
+    <div className="file-row-actions-container">
       {!didClick ? (
         <button
+          className="rename-button"
           onClick={() => {
             setRenameFile({ id: file.id, updatedValue: file.filename });
           }}
         >
-          Rename
+          ✎ Rename
         </button>
       ) : null}
 
       <button
+        className="create-copy-button"
         disabled={!!fileRowError || didClick}
         onClick={() => {
           try {
@@ -69,13 +71,17 @@ const FileRowCreateCopy: React.FC<FileRowCreateCopyProps> = ({
           }
         }}
       >
-        {didClick ? "Creating copy..." : "Create a copy"}
+        {didClick ? "Creating copy..." : "❏ Create a copy"}
       </button>
       {didClick ? (
         isRunning ? (
-          <button onClick={pauseTimeout}>Pause</button>
+          <button className="pause-button" onClick={pauseTimeout}>
+            ❚❚
+          </button>
         ) : (
-          <button onClick={resumeTimeout}>Resume</button>
+          <button className="resume-button" onClick={resumeTimeout}>
+            ▶
+          </button>
         )
       ) : null}
     </div>

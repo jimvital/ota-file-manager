@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import JSZip from "jszip";
 
-import { CurrentFile } from "./types";
+import { CurrentFile } from "../types";
 
 interface ZipDownloadProps {
   currentZipFilename: string;
@@ -22,6 +22,7 @@ const ZipDownload: React.FC<ZipDownloadProps> = ({
 
       for (let i = 0; i < currentFiles.length; i++) {
         const file = currentFiles[i];
+
         newZip.file(
           file.content.name,
           (file.content as any)._data.compressedContent
@@ -36,6 +37,8 @@ const ZipDownload: React.FC<ZipDownloadProps> = ({
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
+
+      setFileDownloadError("");
     } catch (error) {
       setFileDownloadError("Failed to download files");
     }
@@ -43,10 +46,14 @@ const ZipDownload: React.FC<ZipDownloadProps> = ({
 
   return (
     <>
-      <button onClick={handleZipDownload} disabled={shouldDisable}>
-        Save to directory
+      <button
+        className="save-to-directory-button"
+        onClick={handleZipDownload}
+        disabled={shouldDisable}
+      >
+        🢃 Save to directory
       </button>
-      <p>{fileDownloadError}</p>
+      <p className="error-message center">{fileDownloadError}</p>
     </>
   );
 };

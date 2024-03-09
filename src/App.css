@@ -1,3 +1,171 @@
 .app {
-  display: block;
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  background-color: #282c34;
+}
+
+.file-manager-container {
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100% - 96px);
+  width: 720px;
+  background-color: #ffffff;
+  padding: 24px;
+  border-radius: 16px;
+  color: #282c34;
+
+  .file-manager-header {
+    text-align: center;
+  }
+}
+
+.file-picker-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .file-picker {
+    border: 4px solid #61dafb;
+    border-radius: 6px;
+    background-color: #61dafb;
+  }
+}
+
+.file-contents {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 24px;
+  padding-right: 8px;
+
+  .file-row {
+    &:not(:last-of-type) {
+      border-bottom: solid 2px #282c34;
+      margin-bottom: 12px;
+    }
+
+    .file-row-rename-container {
+      display: flex;
+      gap: 8px;
+
+      .rename-input {
+        width: calc(100% - 144px);
+
+        &:disabled {
+          cursor: not-allowed;
+        }
+      }
+
+      .file-rename-actions {
+        display: flex;
+        gap: 8px;
+
+        .rename-apply-button {
+          background-color: #3998b6;
+          border: none;
+          border-radius: 12px;
+          color: white;
+          min-width: 64px;
+          cursor: pointer;
+
+          &:hover {
+            background-color: #3999b6d0;
+          }
+
+          &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+          }
+        }
+
+        .rename-cancel-button {
+          border-radius: 12px;
+          border: solid 2px #3998b6;
+          background-color: transparent;
+          color: #3998b6;
+          cursor: pointer;
+
+          &:hover {
+            opacity: 0.8;
+          }
+        }
+      }
+    }
+
+    .file-row-default-container {
+      display: flex;
+
+      .file-row-name {
+        margin: 0;
+        width: calc(100% - 224px);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .file-row-actions-container {
+        display: flex;
+        gap: 8px;
+
+        .rename-button,
+        .create-copy-button {
+          background-color: #3998b6;
+          border: none;
+          border-radius: 12px;
+          color: white;
+          cursor: pointer;
+          height: 24px;
+          padding: 0 12px;
+
+          &:hover {
+            background-color: #3999b6d0;
+          }
+
+          &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+          }
+        }
+      }
+    }
+
+    .pause-button,
+    .resume-button {
+      border-radius: 6px;
+      border: solid 2px #3998b6;
+      background-color: transparent;
+      color: #3998b6;
+      cursor: pointer;
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+  }
+}
+
+.save-to-directory-button {
+  background-color: #282c34;
+  border: none;
+  border-radius: 6px;
+  min-height: 36px;
+  width: 25%;
+  cursor: pointer;
+  color: white;
+  align-self: center;
+
+  &:hover {
+    background-color: #282c34c2;
+  }
+}
+
+.error-message {
+  color: red;
+  font-size: 14px;
+
+  &.center {
+    text-align: center;
+  }
 }

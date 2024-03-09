@@ -1,10 +1,10 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
 
-import { CurrentFile, RenameFile } from "./types";
-import { defaultRenameFile } from "./constants";
+import { CurrentFile, RenameFile } from "../types";
+import { defaultRenameFile } from "../constants";
 
-import FileRowRename from "./FileRowRename";
-import FileRowCreateCopy from "./FileRowCreateCopy";
+import FileRowRename from "./FileRowRenameInput";
+import FileRowCreateCopy from "./FileRowActions";
 
 interface FileRowProps {
   file: CurrentFile;
@@ -23,36 +23,9 @@ const FileRow: React.FC<FileRowProps> = ({
   const [fileRowError, setFileRowError] = useState<string>("");
 
   return (
-    <div>
+    <div className="file-row">
       {renameFile.id === file.id ? (
-        <div>
-          <input
-            name="rename"
-            value={renameFile.updatedValue}
-            placeholder="Enter new file name"
-            onChange={(event) => {
-              const updatedValue = event.target.value;
-
-              if (!updatedValue) {
-                setFileRowError("Please enter file name");
-              } else {
-                setFileRowError("");
-              }
-
-              const hasDuplicate = currentFiles.some(
-                (file) =>
-                  file.id !== renameFile.id && updatedValue === file.filename
-              );
-
-              if (hasDuplicate) {
-                setFileRowError("Duplicate file name detected");
-              } else {
-                setFileRowError("");
-              }
-
-              setRenameFile((prev) => ({ ...prev, updatedValue }));
-            }}
-          />
+        <div className="file-row-rename-container">
           <FileRowRename
             currentFiles={currentFiles}
             setCurrentFiles={setCurrentFiles}
@@ -64,8 +37,8 @@ const FileRow: React.FC<FileRowProps> = ({
           />
         </div>
       ) : (
-        <div style={{ display: "flex" }}>
-          {file.filename}
+        <div className="file-row-default-container">
+          <p className="file-row-name">{file.content.name}</p>
           <FileRowCreateCopy
             file={file}
             currentFiles={currentFiles}
@@ -77,7 +50,7 @@ const FileRow: React.FC<FileRowProps> = ({
           />
         </div>
       )}
-      <p>{fileRowError}</p>
+      <p className="error-message">{fileRowError}</p>
     </div>
   );
 };

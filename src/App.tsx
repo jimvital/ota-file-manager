@@ -3,8 +3,8 @@ import * as jszip from "jszip";
 
 import { CurrentFile } from "./types";
 
-import FileRow from "./FileRow";
-import ZipDownload from "./ZipDownload";
+import FileRow from "./components/FileRow";
+import ZipDownload from "./components/ZipDownload";
 
 import "./App.css";
 
@@ -15,6 +15,8 @@ const App: React.FC = () => {
   const [shouldDisable, setShouldDisable] = useState<boolean>(false);
 
   const handleFilePick = async (event: ChangeEvent<HTMLInputElement>) => {
+    setCurrentFiles([]);
+
     const zipNameSplit = event.target.value.split(/(\\|\/)/g).pop() || "";
     setCurrentZipFilename(zipNameSplit);
 
@@ -46,6 +48,7 @@ const App: React.FC = () => {
       });
 
       setCurrentFiles(tempCurrentFiles);
+      setFilePickerError("");
     } catch (error) {
       setFilePickerError("Failed to load zip file");
     }
@@ -53,25 +56,37 @@ const App: React.FC = () => {
 
   return (
     <div className="app">
-      <header className="app-header">OTA File Manager</header>
-      <input type="file" name="file-picker" onChange={handleFilePick} />
-      <p>{filePickerError}</p>
-      {currentFiles.map((file) => (
-        <FileRow
-          key={file.id}
-          file={file}
-          currentFiles={currentFiles}
-          setCurrentFiles={setCurrentFiles}
-          setShouldDisable={setShouldDisable}
-        />
-      ))}
-      {currentFiles.length > 0 ? (
-        <ZipDownload
-          currentZipFilename={currentZipFilename}
-          currentFiles={currentFiles}
-          shouldDisable={shouldDisable}
-        />
-      ) : null}
+      <div className="file-manager-container">
+        <h1 className="file-manager-header">OTA File Manager</h1>
+        <div className="file-picker-container">
+          <input
+            type="file"
+            className="file-picker"
+            name="file-picker"
+            accept=".zip"
+            onChange={handleFilePick}
+          />
+          <p className="error-message center">{filePickerError}</p>
+        </div>
+        <div className="file-contents">
+          {currentFiles.map((file) => (
+            <FileRow
+              key={file.id}
+              file={file}
+              currentFiles={currentFiles}
+              setCurrentFiles={setCurrentFiles}
+              setShouldDisable={setShouldDisable}
+            />
+          ))}
+        </div>
+        {currentFiles.length > 0 ? (
+          <ZipDownload
+            currentZipFilename={currentZipFilename}
+            currentFiles={currentFiles}
+            shouldDisable={shouldDisable}
+          />
+        ) : null}
+      </div>
     </div>
   );
 };

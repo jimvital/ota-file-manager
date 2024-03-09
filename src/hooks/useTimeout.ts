@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
-// Reference: https://gist.github.com/codeaid/11b2ae365fe928763ab2a77cbfbe07f3
+// Modified from: https://gist.github.com/codeaid/11b2ae365fe928763ab2a77cbfbe07f3
 
 type UseTimeoutCallback = (...args: Array<any>) => void;
 
