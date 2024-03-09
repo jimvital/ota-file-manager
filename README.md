@@ -27,7 +27,7 @@ You can also access this application via [Github pages](https://jimvital.github.
 
 ## Functionalities
 
-Before interacting with the application, the user must provide a _.zip_ file by clicking the `Browse` button. User will be prompted with an error message if an invalid file is selected.
+Before interacting with the application, the user must provide a _.zip_ file by clicking the starting button. User will be prompted with an error message if an invalid file is selected.
 
 Once the _.zip_ file is loaded, a list will appear with all of its contents.
 
