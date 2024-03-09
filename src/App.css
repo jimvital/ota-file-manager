@@ -159,6 +159,11 @@
   &:hover {
     background-color: #282c34c2;
   }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 }
 
 .error-message {

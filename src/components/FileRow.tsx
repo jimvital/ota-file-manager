@@ -38,6 +38,7 @@ const FileRow: React.FC<FileRowProps> = ({
         </div>
       ) : (
         <div className="file-row-default-container">
+          {/* Display file name along with parent folders, if applicable */}
           <p className="file-row-name">{file.content.name}</p>
           <FileRowCreateCopy
             file={file}

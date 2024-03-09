@@ -20,6 +20,7 @@ const ZipDownload: React.FC<ZipDownloadProps> = ({
     try {
       const newZip = new JSZip();
 
+      // Zip all updated files
       for (let i = 0; i < currentFiles.length; i++) {
         const file = currentFiles[i];
 
@@ -31,6 +32,7 @@ const ZipDownload: React.FC<ZipDownloadProps> = ({
 
       const blob = await newZip.generateAsync({ type: "blob" });
 
+      // Simulate download action
       const a = document.createElement("a");
       a.href = URL.createObjectURL(blob);
       a.setAttribute("download", currentZipFilename);

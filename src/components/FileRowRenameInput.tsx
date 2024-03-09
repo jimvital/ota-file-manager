@@ -26,6 +26,7 @@ const FileRowRename: React.FC<FileRowRenameProps> = ({
 }) => {
   const [didClick, setDidClick] = useState<boolean>(false);
 
+  // Simulate process timeout for renaming a file
   const { isRunning, resumeTimeout, pauseTimeout } = useTimeout(() => {
     const updatedFiles = currentFiles.map((file) => {
       if (file.id === renameFile.id) {

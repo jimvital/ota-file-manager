@@ -25,6 +25,7 @@ const FileRowCreateCopy: React.FC<FileRowCreateCopyProps> = ({
 }) => {
   const [didClick, setDidClick] = useState<boolean>(false);
 
+  // Simulate process timeout for creating a file copy
   const { isRunning, resumeTimeout, pauseTimeout } = useTimeout(() => {
     const filenameCopy = `(copy) ${file.filename}`;
 
@@ -58,7 +59,6 @@ const FileRowCreateCopy: React.FC<FileRowCreateCopyProps> = ({
           ✎ Rename
         </button>
       ) : null}
-
       <button
         className="create-copy-button"
         disabled={!!fileRowError || didClick}
