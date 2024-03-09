@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/ota-file-manager/static/css/main.c46ff915.css",
+    "main.js": "/ota-file-manager/static/js/main.799470ad.js",
+    "index.html": "/ota-file-manager/index.html",
+    "main.c46ff915.css.map": "/ota-file-manager/static/css/main.c46ff915.css.map",
+    "main.799470ad.js.map": "/ota-file-manager/static/js/main.799470ad.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c46ff915.css",
+    "static/js/main.799470ad.js"
+  ]
+}
